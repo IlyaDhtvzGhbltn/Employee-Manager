@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace EmployeeManagement.WinClient.Infrastructure.Commands
 {
@@ -23,12 +24,29 @@ namespace EmployeeManagement.WinClient.Infrastructure.Commands
 
         protected override async Task ExecuteCommandAsync(object parameter)
         {
+            Thread.Sleep(10000);
             _authViewModel.Alert = "Please wait...";
 
-            Permissions role = await _authentication.Login(_authViewModel.Login, _authViewModel.Password);
-            if (role == null)
+            var passwordBox = parameter as PasswordBox;
+
+            Permissions perms = await _authentication.Login(_authViewModel.Login, passwordBox.Password);
+            if (perms == null)
             {
                 _authViewModel.Alert = "Login or password incorrect.";
+            }
+            else 
+            {
+                Window secureWind = null;
+                switch (perms.Role) 
+                {
+                    case "admin": secureWind = new AdminView();
+                        break;
+                    case "user": secureWind = new UserView();
+                        break;
+                    default: throw new NotImplementedException("Unexpected role was found");
+                }
+                secureWind.Show();
+                _authViewModel.Close.Invoke();
             }
         }
     }

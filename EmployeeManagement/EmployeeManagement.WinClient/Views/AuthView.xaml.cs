@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.WinClient.ViewModels;
+﻿using EmployeeManagement.WinClient.Infrastructure;
+using EmployeeManagement.WinClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,15 @@ namespace EmployeeManagement.WinClient
         public AuthView()
         {
             InitializeComponent();
+            Loaded += AuthView_Loaded;
+        }
+
+        private void AuthView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is IClose wind)
+            {
+                wind.Close += () => this.Close();
+            }
         }
     }
 }

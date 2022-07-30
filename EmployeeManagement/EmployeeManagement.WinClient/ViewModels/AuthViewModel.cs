@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.WinClient.DAL;
 using EmployeeManagement.WinClient.Infrastructure;
 using EmployeeManagement.WinClient.Infrastructure.Commands;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,16 +9,21 @@ using System.Windows.Input;
 
 namespace EmployeeManagement.WinClient.ViewModels
 {
-    public class AuthViewModel : ViewModelBase
+    public class AuthViewModel : ViewModelBase, IClose
     {
         private string _login;
-        private string _password;
         private string _alert;
         private readonly AsyncCommand _loginCommand;
         private readonly IAuthentication _authentication;
+        private DelegateCommand _closeCommand; 
+
+
 
         public ICommand LoginCommand => _loginCommand;
-
+        public DelegateCommand CloseCommand => _closeCommand ?? (_closeCommand = new DelegateCommand(CloseWindow));
+        
+        
+        public Action Close { get; set; }
         public string Login 
         {
             get 
@@ -29,17 +35,6 @@ namespace EmployeeManagement.WinClient.ViewModels
                 SetProperty(ref _login, value);
             }
         }        
-        public string Password 
-        {
-            get 
-            { 
-                return _password; 
-            }
-            set 
-            {
-                SetProperty(ref _password, value);
-            }
-        }
         public string Alert 
         {
             get 
@@ -56,6 +51,11 @@ namespace EmployeeManagement.WinClient.ViewModels
         {
             _authentication = new SimplestAuthentication();
             _loginCommand = new LoginCommand(this, _authentication);
+        }
+
+        public void CloseWindow()
+        {
+            Close?.Invoke();
         }
     }
 }

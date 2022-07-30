@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EmployeeManagement.WinClient.Infrastructure;
+using EmployeeManagement.WinClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;

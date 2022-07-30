@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagement.WinClient.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,6 +10,7 @@ namespace EmployeeManagement.WinClient.ViewModels
     public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
