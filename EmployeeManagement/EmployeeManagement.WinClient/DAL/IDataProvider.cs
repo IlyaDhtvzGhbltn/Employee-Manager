@@ -1,10 +1,16 @@
-﻿using System;
+﻿using EmployeeManagement.Entities;
+using EmployeeManagement.WinClient.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EmployeeManagement.WinClient.DAL
 {
-    interface IDataProvider
+    public interface IDataProvider
     {
+        Task<ObservableCollection<EmployeeModel>> GetEmployeeList(int count, int skip);
+        Task<int> GetEmploeeCount();
     }
 }

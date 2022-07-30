@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.WinClient.DAL
 {
-    class SimplestAuthentication : IAuthentication
+    public class SimplestAuthentication : IAuthentication
     {
         public async Task<Permissions> Login(string login, string password)
         {

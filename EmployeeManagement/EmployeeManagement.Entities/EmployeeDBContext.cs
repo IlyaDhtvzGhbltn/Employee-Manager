@@ -21,7 +21,7 @@ namespace EmployeeManagement.Entities
                 new WinClientUser() { Id= 1, Login= "Admin", PasswordHash= "QWRtaW4=", Role= "admin" },
                 new WinClientUser() { Id= 2,  Login="User", PasswordHash= "VXNlcg==", Role= "user" });
 
-            for (int i = 1; i < 1000; i++)
+            for (int i = 1; i < 150; i++)
             {
                 var rand = new Random();
                 modelBuilder.Entity<Employee>()

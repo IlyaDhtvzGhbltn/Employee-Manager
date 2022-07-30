@@ -13,16 +13,16 @@ namespace EmployeeManagement.WinClient.ViewModels
     {
         private string _login;
         private string _alert;
+        private DelegateCommand _closeCommand;
+
         private readonly AsyncCommand _loginCommand;
         private readonly IAuthentication _authentication;
-        private DelegateCommand _closeCommand; 
-
 
 
         public ICommand LoginCommand => _loginCommand;
         public DelegateCommand CloseCommand => _closeCommand ?? (_closeCommand = new DelegateCommand(CloseWindow));
-        
-        
+
+
         public Action Close { get; set; }
         public string Login 
         {

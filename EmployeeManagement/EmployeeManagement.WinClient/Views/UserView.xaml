@@ -3,10 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EmployeeManagement.WinClient.Views"
+        xmlns:local="clr-namespace:EmployeeManagement.WinClient.ViewModels"
         mc:Ignorable="d"
-        Title="UserView" Height="450" Width="800">
+        Title="Employee list - read only mode" MinHeight="450" MinWidth="800">
+    <Window.DataContext>
+        <local:UserModeViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Border Padding="10px">
+                <Label FontSize="24" FontFamily="Arial Black" Foreground="Blue">Employee Manager</Label>
+            </Border>
+        </StackPanel>
+        <WrapPanel FlowDirection="LeftToRight">
+            <Border Padding="1px 55px 5px 11px" BorderThickness="11px">
+                <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <DataGrid MinWidth="500px" 
+                              IsReadOnly="True" 
+                              ScrollViewer.CanContentScroll="True"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"                              
+                              CanUserResizeColumns="False" 
+                              CanUserDeleteRows="False" 
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding EmploeeList}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Emploee Id" Binding="{Binding Id}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emploee Name" Binding="{Binding  Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Emploee Surname" Binding="{Binding  Surname}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </Border>
+            <Border>
+                <DockPanel FlowDirection="LeftToRight">
+                    <Border Padding="10px">
+                        <Button IsEnabled="{Binding Path=PreviousPageExists, Mode=TwoWay}" 
+                                Command="{Binding Path=UpdateListCommand}" 
+                                CommandParameter="{Binding PreviousPage}"
+                                Width="100" Height="25">Previous</Button>
+                    </Border>
+                    <Border Padding="10px">
+                        <Button Width="100" Height="25" 
+                                IsEnabled="{Binding Path=NextPageExists, Mode=TwoWay}"
+                                Command="{Binding Path=UpdateListCommand}"
+                                CommandParameter="{Binding Path=NextPage}">Next</Button>
+                    </Border>                
+                </DockPanel>
+            </Border>
+        </WrapPanel>
     </Grid>
 </Window>

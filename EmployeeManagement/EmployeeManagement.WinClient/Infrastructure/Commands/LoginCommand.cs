@@ -24,30 +24,34 @@ namespace EmployeeManagement.WinClient.Infrastructure.Commands
 
         protected override async Task ExecuteCommandAsync(object parameter)
         {
-            Thread.Sleep(10000);
-            _authViewModel.Alert = "Please wait...";
-
-            var passwordBox = parameter as PasswordBox;
-
-            Permissions perms = await _authentication.Login(_authViewModel.Login, passwordBox.Password);
-            if (perms == null)
+            var perms = new Permissions();
+            var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            await Task.Run(async () => 
             {
-                _authViewModel.Alert = "Login or password incorrect.";
-            }
-            else 
-            {
-                Window secureWind = null;
-                switch (perms.Role) 
+                _authViewModel.Alert = "Please wait...";
+
+                var passwordBox = parameter as PasswordBox;
+
+                perms = await _authentication.Login(_authViewModel.Login, passwordBox.Password);
+                if (perms == null)
                 {
-                    case "admin": secureWind = new AdminView();
-                        break;
-                    case "user": secureWind = new UserView();
-                        break;
-                    default: throw new NotImplementedException("Unexpected role was found");
+                    _authViewModel.Alert = "Login or password incorrect.";
                 }
-                secureWind.Show();
+            }).ContinueWith((r)=> 
+            {
+                if (perms.Role == "user") 
+                {
+                    var secureWind = new UserView();
+                    secureWind.Show();
+                }
+                else if (perms.Role == "admin") 
+                {
+                    var secureWind = new AdminView();
+                    secureWind.Show();
+                }
                 _authViewModel.Close.Invoke();
-            }
+
+            }, scheduler);
         }
     }
 }
