@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeManagement.Entities\EmployeeManagement.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

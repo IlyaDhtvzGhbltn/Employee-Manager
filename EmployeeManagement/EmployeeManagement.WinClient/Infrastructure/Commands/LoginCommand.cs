@@ -25,7 +25,11 @@ namespace EmployeeManagement.WinClient.Infrastructure.Commands
         {
             _authViewModel.Alert = "Please wait...";
 
-            await _authentication.Login(_authViewModel.Login, _authViewModel.Password);
+            Permissions role = await _authentication.Login(_authViewModel.Login, _authViewModel.Password);
+            if (role == null)
+            {
+                _authViewModel.Alert = "Login or password incorrect.";
+            }
         }
     }
 }

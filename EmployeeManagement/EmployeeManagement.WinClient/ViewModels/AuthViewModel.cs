@@ -54,6 +54,7 @@ namespace EmployeeManagement.WinClient.ViewModels
 
         public AuthViewModel()
         {
+            _authentication = new SimplestAuthentication();
             _loginCommand = new LoginCommand(this, _authentication);
         }
     }

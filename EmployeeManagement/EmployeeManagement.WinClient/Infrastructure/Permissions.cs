@@ -6,6 +6,6 @@ namespace EmployeeManagement.WinClient.Infrastructure
 {
     public class Permissions
     {
-
+        public string Role { get; set; }
     }
 }
