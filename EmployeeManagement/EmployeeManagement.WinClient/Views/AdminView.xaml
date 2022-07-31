@@ -71,18 +71,21 @@
                         <Label>New Emploee Name:</Label>
                     </Border>
                     <Border Padding="5px">
-                        <TextBox></TextBox>
+                        <TextBox x:Name="newEmploeeName" Text="{Binding NewEmploeeName, Mode=TwoWay}"></TextBox>
                     </Border>
                     <Border Padding="5px">
-                        <Label>New Emploee Name:</Label>
-                    </Border>
-
-                    <Border Padding="5px">
-                        <TextBox></TextBox>
+                        <Label>New Emploee Surname:</Label>
                     </Border>
                     <Border Padding="5px">
-                        <Button Height="25px" Width="120px"
-                                Command="{Binding DeleteEmploeeCommand}">Create New</Button>
+                        <TextBox x:Name="newEmploeeSurname" Text="{Binding NewEmploeeSurname, Mode=TwoWay}"></TextBox>
+                    </Border>
+                    <Border Padding="5px">
+                        <Button Content="Create New" Height="25px" Width="120px"
+                            Command="{Binding AddEmploeeCommand}">
+                        </Button>
+                    </Border>
+                    <Border Padding="3px">
+                        <Label Foreground="Red" Content="{Binding ErrorMessage}"/>
                     </Border>
                 </StackPanel>
             </Border>

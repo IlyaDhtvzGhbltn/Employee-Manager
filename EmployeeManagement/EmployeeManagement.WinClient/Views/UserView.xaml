@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:EmployeeManagement.WinClient.ViewModels"
         xmlns:partial="clr-namespace:EmployeeManagement.WinClient.Views.Partial"
         mc:Ignorable="d"
-        Title="Employee list - read only mode" MinHeight="450" MinWidth="800">
+        Title="Employee list - read only mode" MinHeight="450" MinWidth="800"
+        >
+
     <Window.DataContext>
         <local:UserModeViewModel/>
     </Window.DataContext>

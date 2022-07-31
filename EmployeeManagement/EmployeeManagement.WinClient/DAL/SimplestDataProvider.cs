@@ -5,11 +5,34 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using EmployeeManagement.WinClient.Models;
 using System.Collections.ObjectModel;
+using System;
 
 namespace EmployeeManagement.WinClient.DAL
 {
     public class SimplestDataProvider : IDataProvider
     {
+        public async Task AddEmploee(EmployeeModel emploeeModel)
+        {
+            using (var context = new EmployeeDBContext())
+            {
+                var oldEmpl = await context.Employees
+                    .FirstOrDefaultAsync(x => x.Name == emploeeModel.Name && x.Surname == emploeeModel.Surname);
+
+                if(oldEmpl != null)
+                {
+                    throw new ArgumentException();
+                }
+
+                var newEmpl = new Employee() 
+                {
+                    Name = emploeeModel.Name, 
+                    Surname = emploeeModel.Surname
+                };
+                context.Employees.Add(newEmpl);
+                await context.SaveChangesAsync();
+            }
+        }
+
         public async Task DeleteEmploee(int id)
         {
             using (var context = new EmployeeDBContext()) 
