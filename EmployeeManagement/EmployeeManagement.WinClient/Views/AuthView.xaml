@@ -29,7 +29,7 @@
             </Border>
             <PasswordBox Name="PasswordBox" Width="200" MaxLength="100" />
             <Border Padding="0px 20px">
-                <Button Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PasswordBox}" Width="200px">Log in</Button>
+                <Button IsEnabled="{Binding LoginBtnEnabled}" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PasswordBox}" Width="200px">Log in</Button>
             </Border>
             <Border Padding="10px">
                 <TextBlock Text="{Binding Path=Alert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

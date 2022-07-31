@@ -14,6 +14,7 @@ namespace EmployeeManagement.WinClient.ViewModels
         private string _login;
         private string _alert;
         private DelegateCommand _closeCommand;
+        private bool _loginBtnEnabled = true;
 
         private readonly AsyncCommand _loginCommand;
         private readonly IAuthentication _authentication;
@@ -45,6 +46,11 @@ namespace EmployeeManagement.WinClient.ViewModels
             {
                 SetProperty(ref _alert, value);
             }
+        }
+        public bool LoginBtnEnabled 
+        {
+            get { return _loginBtnEnabled; }
+            set { SetProperty(ref _loginBtnEnabled, value); }
         }
 
         public AuthViewModel()

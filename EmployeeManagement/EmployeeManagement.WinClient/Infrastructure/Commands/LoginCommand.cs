@@ -29,30 +29,37 @@ namespace EmployeeManagement.WinClient.Infrastructure.Commands
             await Task.Run(async () => 
             {
                 _authViewModel.Alert = "Please wait...";
+                _authViewModel.LoginBtnEnabled = false;
 
                 var passwordBox = parameter as PasswordBox;
 
                 perms = await _authentication.Login(_authViewModel.Login, passwordBox.Password);
+
+            }).ContinueWith((r)=> 
+            {
                 if (perms == null)
                 {
                     _authViewModel.Alert = "Login or password incorrect.";
                 }
-            }).ContinueWith((r)=> 
-            {
-                switch (perms.Role)
+                else
                 {
-                    case "user":
-                        var userView = new UserView();
-                        userView.Show();
-                        break;
-                    case "admin":
-                        var adminView = new AdminView();
-                        adminView.Show();
-                        break;
-                };
-                _authViewModel.Close.Invoke();
+                    switch (perms.Role)
+                    {
+                        case "user":
+                            var userView = new UserView();
+                            userView.Show();
+                            break;
+                        case "admin":
+                            var adminView = new AdminView();
+                            adminView.Show();
+                            break;
+                    };
+                    _authViewModel.Close.Invoke();
+                }
 
             }, scheduler);
+
+            _authViewModel.LoginBtnEnabled = true;
         }
     }
 }
