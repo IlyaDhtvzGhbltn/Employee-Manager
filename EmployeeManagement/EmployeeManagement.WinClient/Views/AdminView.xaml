@@ -7,10 +7,14 @@
         xmlns:part="clr-namespace:EmployeeManagement.WinClient.Views.Partial"
         mc:Ignorable="d"
         Name="EmployeesManager"
+        xmlns:conv="clr-namespace:EmployeeManagement.WinClient.Infrastructure.Converters"
         Title="Employee list - Admin mode" MinHeight="450" MinWidth="800">
     <Window.DataContext>
         <local:AdminModeViewModel></local:AdminModeViewModel>
     </Window.DataContext>
+    <Window.Resources>
+        <conv:UserNameLengthToBoolConverter x:Key="LengthToBoolConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70px"/>
@@ -82,6 +86,12 @@
                     <Border Padding="5px">
                         <Button Content="Create New" Height="25px" Width="120px"
                             Command="{Binding AddEmploeeCommand}">
+                            <Button.IsEnabled>
+                                <MultiBinding Converter="{StaticResource LengthToBoolConverter}">
+                                    <Binding ElementName="newEmploeeSurname" Path="Text"  />
+                                    <Binding ElementName="newEmploeeName" Path="Text"  />
+                                </MultiBinding>
+                            </Button.IsEnabled>
                         </Button>
                     </Border>
                     <Border Padding="3px">
