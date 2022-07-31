@@ -10,6 +10,16 @@ namespace EmployeeManagement.WinClient.DAL
 {
     public class SimplestDataProvider : IDataProvider
     {
+        public async Task DeleteEmploee(int id)
+        {
+            using (var context = new EmployeeDBContext()) 
+            {
+                var emploee = await context.Employees.FirstOrDefaultAsync(x => x.Id == id);
+                context.Remove(emploee);
+                await context.SaveChangesAsync();
+            }
+        }
+
         public async Task<int> GetEmploeeCount()
         {
             using (var context = new EmployeeDBContext())

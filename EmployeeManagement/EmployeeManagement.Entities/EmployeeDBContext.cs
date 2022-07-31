@@ -25,7 +25,7 @@ namespace EmployeeManagement.Entities
             {
                 var rand = new Random();
                 modelBuilder.Entity<Employee>()
-                    .HasData(new Employee() { Id= i, Name = names[rand.Next(0, names.Length - 1)], Surname= "Doe" });
+                    .HasData(new Employee() { Id= i, Name = names[rand.Next(0, names.Length - 1)], Surname= $"Doe_{i}" });
             }
         }
 

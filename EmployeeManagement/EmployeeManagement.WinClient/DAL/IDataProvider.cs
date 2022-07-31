@@ -12,5 +12,6 @@ namespace EmployeeManagement.WinClient.DAL
     {
         Task<ObservableCollection<EmployeeModel>> GetEmployeeList(int count, int skip);
         Task<int> GetEmploeeCount();
+        Task DeleteEmploee(int Id);
     }
 }

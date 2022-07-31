@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="EmployeeManagement.WinClient.Views.Partial.NavigateList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EmployeeManagement.WinClient.Views.Partial"
+             mc:Ignorable="d">
+    <DockPanel FlowDirection="LeftToRight">
+        <Border Padding="1px">
+            <Button IsEnabled="{Binding Path=PreviousPageExists, Mode=TwoWay}" 
+                                Command="{Binding Path=UpdateListCommand}" 
+                                CommandParameter="{Binding PreviousPage}"
+                                Width="100" Height="25">Previous</Button>
+        </Border>
+        <Border Padding="1px">
+            <Button Width="100" Height="25" 
+                                IsEnabled="{Binding Path=NextPageExists, Mode=TwoWay}"
+                                Command="{Binding Path=UpdateListCommand}"
+                                CommandParameter="{Binding Path=NextPage}">Next</Button>
+        </Border>
+    </DockPanel>
+</UserControl>

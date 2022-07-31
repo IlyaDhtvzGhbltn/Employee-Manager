@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.WinClient.DAL;
 using EmployeeManagement.WinClient.ViewModels;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement.WinClient.Infrastructure.Commands
@@ -9,7 +10,6 @@ namespace EmployeeManagement.WinClient.Infrastructure.Commands
 
         private readonly IDataProvider _dataProvider;
         protected readonly EmploeeListViewModel _emploeeListViewModel;
-
 
 
         public UpdateEmploeeListCommand(EmploeeListViewModel emploeeListViewModel, IDataProvider dataProvider)

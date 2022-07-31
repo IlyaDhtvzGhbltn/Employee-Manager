@@ -39,16 +39,17 @@ namespace EmployeeManagement.WinClient.Infrastructure.Commands
                 }
             }).ContinueWith((r)=> 
             {
-                if (perms.Role == "user") 
+                switch (perms.Role)
                 {
-                    var secureWind = new UserView();
-                    secureWind.Show();
-                }
-                else if (perms.Role == "admin") 
-                {
-                    var secureWind = new AdminView();
-                    secureWind.Show();
-                }
+                    case "user":
+                        var userView = new UserView();
+                        userView.Show();
+                        break;
+                    case "admin":
+                        var adminView = new AdminView();
+                        adminView.Show();
+                        break;
+                };
                 _authViewModel.Close.Invoke();
 
             }, scheduler);

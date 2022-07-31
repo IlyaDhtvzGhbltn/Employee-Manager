@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManagement.WinClient.ViewModels"
+        xmlns:partial="clr-namespace:EmployeeManagement.WinClient.Views.Partial"
         mc:Ignorable="d"
         Title="Employee list - read only mode" MinHeight="450" MinWidth="800">
     <Window.DataContext>
@@ -16,9 +17,9 @@
             </Border>
         </StackPanel>
         <WrapPanel FlowDirection="LeftToRight">
-            <Border Padding="1px 55px 5px 11px" BorderThickness="11px">
+            <Border Padding="1px 55px 5px 1px" BorderThickness="11px">
                 <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <DataGrid MinWidth="500px" 
+                    <DataGrid MinWidth="350px" 
                               IsReadOnly="True" 
                               ScrollViewer.CanContentScroll="True"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -35,22 +36,11 @@
                     </DataGrid>
                 </ScrollViewer>
             </Border>
-            <Border>
-                <DockPanel FlowDirection="LeftToRight">
-                    <Border Padding="10px">
-                        <Button IsEnabled="{Binding Path=PreviousPageExists, Mode=TwoWay}" 
-                                Command="{Binding Path=UpdateListCommand}" 
-                                CommandParameter="{Binding PreviousPage}"
-                                Width="100" Height="25">Previous</Button>
-                    </Border>
-                    <Border Padding="10px">
-                        <Button Width="100" Height="25" 
-                                IsEnabled="{Binding Path=NextPageExists, Mode=TwoWay}"
-                                Command="{Binding Path=UpdateListCommand}"
-                                CommandParameter="{Binding Path=NextPage}">Next</Button>
-                    </Border>                
-                </DockPanel>
-            </Border>
+            <StackPanel>
+                <Border Padding="1PX 55PX 5px 1px">
+                    <partial:NavigateList></partial:NavigateList>
+                </Border>
+            </StackPanel> 
         </WrapPanel>
     </Grid>
 </Window>
